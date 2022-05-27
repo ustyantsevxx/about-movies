@@ -9,8 +9,8 @@ services:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-    ports:
-      - 5432:5432
+    ports: 
+      - 18881:5432
 
   adminer:
     image: adminer
@@ -18,7 +18,7 @@ services:
     environment:
       - ADMINER_DESIGN=pappu687
     ports:
-      - 8090:8080
+      - 18882:8080
  
   nestjs:
     image: node:lts
@@ -27,13 +27,13 @@ services:
     volumes:
       - ./server:/var/www:cached
     ports:
-      - 8000:8000
+      - 18883:8000
 
   nextjs:
-    image: node:lts-alpine
+    image: node:lts
     working_dir: /var/www
     command: yarn start:dev
     volumes:
       - ./client:/var/www:cached
     ports:
-      - 18888:18888
+      - 18884:18888
