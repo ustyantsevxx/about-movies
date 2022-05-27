@@ -3,7 +3,7 @@ import Head from 'next/head'
 
 import { GuestOnly } from '../components/GuestOnly'
 import { LayoutDefault } from '../components/LayoutDefault'
-import { LoginPageForm } from '../components/LoginPageForm'
+import { LoginForm } from '../components/LoginForm'
 
 const LoginPage: NextPage = () => {
   return (
@@ -17,7 +17,7 @@ const LoginPage: NextPage = () => {
           <div className="h-full w-full rounded bg-white p-8 sm:h-auto sm:w-auto sm:shadow-lg">
             <h1 className="text-2xl font-bold">Sign in</h1>
 
-            <LoginPageForm />
+            <LoginForm />
           </div>
         </div>
       </LayoutDefault>

@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { getCookie, removeCookies } from 'cookies-next'
 import { useRouter } from 'next/router'
 import { useQuery, useQueryClient } from 'react-query'
 
@@ -9,7 +10,8 @@ export const USER_QUERY_KEY = 'user'
 export const useAuth = () => {
   const { data } = useQuery(USER_QUERY_KEY, getCurrentUser, {
     refetchOnMount: false,
-    refetchOnWindowFocus: false
+    refetchOnWindowFocus: false,
+    enabled: !!getCookie('token')
   })
 
   const queryClient = useQueryClient()
@@ -18,7 +20,7 @@ export const useAuth = () => {
   const logout = async () => {
     queryClient.removeQueries(USER_QUERY_KEY)
     axios.defaults.headers.common['Authorization'] = ''
-    localStorage.removeItem('token')
+    removeCookies('token')
     await router.push('/')
   }
 

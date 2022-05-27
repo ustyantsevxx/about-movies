@@ -1,19 +1,19 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { FC, Fragment } from 'react'
 
+import SvgClose from '../assets/svg/Close.svg'
+
 type ModalProps = {
   opened: boolean
   onClose?: () => void
 }
 
 export const Modal: FC<ModalProps> = props => {
+  const close = () => props.onClose?.()
+
   return (
-    <Transition appear show={props.opened} as={Fragment}>
-      <Dialog
-        as="div"
-        className="relative z-40"
-        onClose={() => props.onClose?.()}
-      >
+    <Transition show={props.opened} as={Fragment}>
+      <Dialog as="div" className="relative z-40" onClose={close}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -37,7 +37,10 @@ export const Modal: FC<ModalProps> = props => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+              <Dialog.Panel className="relative overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                <button onClick={close} className="absolute right-2 top-2 p-1">
+                  <SvgClose />
+                </button>
                 {props.children}
               </Dialog.Panel>
             </Transition.Child>

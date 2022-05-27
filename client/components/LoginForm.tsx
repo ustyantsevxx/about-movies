@@ -6,10 +6,14 @@ import * as yup from 'yup'
 
 import { signIn } from '../api/modules/auth'
 import { getCurrentUser } from '../api/modules/users/users.service'
-import { Button } from '../components/Button'
-import { FormGroup } from '../components/FormGroup'
-import { InputDefault } from '../components/InputDefault'
 import { EmailPassword } from '../types'
+import { Button } from './Button'
+import { FormGroup } from './FormGroup'
+import { InputDefault } from './InputDefault'
+
+type LoginFormProps = {
+  onSuccess?: () => void
+}
 
 type LoginFormFields = EmailPassword & { form: string }
 
@@ -24,7 +28,7 @@ const loginFormYupSchema = yup
   })
   .required()
 
-export const LoginPageForm: FC = () => {
+export const LoginForm: FC<LoginFormProps> = props => {
   const {
     register,
     handleSubmit,
@@ -43,6 +47,7 @@ export const LoginPageForm: FC = () => {
       setError('form', { message })
     } else {
       await queryClient.fetchQuery('user', getCurrentUser)
+      props.onSuccess?.()
     }
   }
 
