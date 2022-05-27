@@ -7,7 +7,6 @@ import { getCurrentUser } from './users.service'
 export const USER_QUERY_KEY = 'user'
 
 export const useAuth = () => {
-  return { user: undefined }
   const { data } = useQuery(USER_QUERY_KEY, getCurrentUser, {
     refetchOnMount: false,
     refetchOnWindowFocus: false

@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 
-// import { WaitAuth } from '../components/WaitAuth'
+import { WaitAuth } from '../components/WaitAuth'
 
 const CustomApp = ({ Component, pageProps }: any) => {
   const [client] = useState(new QueryClient())
@@ -19,9 +19,9 @@ const CustomApp = ({ Component, pageProps }: any) => {
       <QueryClientProvider client={client}>
         {false && <ReactQueryDevtools position="top-left" />}
 
-        {/* <WaitAuth> */}
-        <Component {...pageProps} />
-        {/* </WaitAuth> */}
+        <WaitAuth>
+          <Component {...pageProps} />
+        </WaitAuth>
       </QueryClientProvider>
     </>
   )
